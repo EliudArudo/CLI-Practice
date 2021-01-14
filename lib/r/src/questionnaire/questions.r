@@ -1,5 +1,5 @@
-source("src/questionnaire/question.r")
-source("src/questionnaire/choice.r")
+source("questionnaire/question.r")
+source("questionnaire/choice.r")
 
 frontendQuestions<- c(
     QuestionnaireQuestion(

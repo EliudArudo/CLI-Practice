@@ -4,7 +4,8 @@ questionnaireInput <- function(prompt) {
 
     tryCatch(
         {
-            selection <- readline(prompt=prompt)
+         cat(prompt)  
+         selection <- readLines("stdin",n=1)  
         },
         error=function(err) {
             selection <- ""
@@ -17,7 +18,7 @@ questionnaireInput <- function(prompt) {
 ####################################################
 
 questionnaireGetSelection <- function() {
-    message("==================================")
+    cat("==================================", "\n")
     selection <- questionnaireInput("Enter your choice (Q to quit): ")
     selection <- toupper(selection)
     return(selection)

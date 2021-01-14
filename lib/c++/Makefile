@@ -1,5 +1,5 @@
 CXX       := g++
-CXX_FLAGS := -std=c++17 -ggdb -Wall
+CXX_FLAGS := -std=c++17 -ggdb -Wall -static
 
 BIN     := bin
 SRC     := src

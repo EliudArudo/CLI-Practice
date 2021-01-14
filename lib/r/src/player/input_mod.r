@@ -1,5 +1,5 @@
-source("src/player/song.r")
-source("src/player/utility.r")
+source("player/song.r")
+source("player/utility.r")
 
 ###################################################################
 playerinput <- function(prompt) {
@@ -7,9 +7,11 @@ playerinput <- function(prompt) {
 
   tryCatch(
       {
-         selection <- readline(prompt=prompt)   
+         cat(prompt)
+         selection <- readLines('stdin', n=1)    
       },
       error=function(err) {
+          cat(err, "\n")
           selection <- ""
       },
       finally=function() {
@@ -21,7 +23,7 @@ playerinput <- function(prompt) {
 
 
 playerGetSelection <- function() {
-    message("==================================================")
+    cat("==================================================", "\n")
     selection <- playerinput("Enter a selection (Q to quit): ")
     selection <- toupper(selection)
     return(selection)   

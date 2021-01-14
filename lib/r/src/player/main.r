@@ -1,6 +1,6 @@
-source("src/player/input_mod.r")
-source("src/player/choice.r")
-source("src/player/song.r")
+source("player/input_mod.r")
+source("player/choice.r")
+source("player/song.r")
 
 Player <- setClass(
     "Player",
@@ -25,24 +25,24 @@ setGeneric(name="listCurrentPlaylist", def=function(self) { standardGeneric("lis
 # Implementations
 setMethod(f="printMenu", signature="Player", definition=function(self) {
     for(choice in self@choices) {
-        message(choice@letter, " - ", choice@statement)
+        cat(choice@letter, " - ", choice@statement, "\n")
     }
     return(self)
 })
 
 setMethod(f="printCurrentSong", signature="Player", definition=function(self) {
     if(length(self@playlist) == 0) {
-        message("No song playing currently")
+        cat("No song playing currently", "\n")
         return(self)
     }
-    message("Playing:")
+    cat("Playing:", "\n")
     song <- self@playlist[[self@cursor]]
     printSong(song)
     return(self)
 })
 
 setMethod(f="playFirstSong", signature="Player", definition=function(self) {
-    message("Playing first song")
+    cat("Playing first song", "\n")
     self@cursor <- 1
     printCurrentSong(self)
     return(self)
@@ -51,12 +51,12 @@ setMethod(f="playFirstSong", signature="Player", definition=function(self) {
 setMethod(f="playNextSong", signature="Player", definition=function(self) {
     nextCursor <- self@cursor + 1
     if(nextCursor >= length(self@playlist)) {
-      message("Wrapping to start of playlist")
+      cat("Wrapping to start of playlist", "\n")
       self@cursor <- 1
     } else {
       self@cursor <- nextCursor 
     }
-    message("Playing next song")
+    cat("Playing next song", "\n")
     printCurrentSong(self)
     return(self)
 })
@@ -64,12 +64,12 @@ setMethod(f="playNextSong", signature="Player", definition=function(self) {
 setMethod(f="playPreviousSong", signature="Player", definition=function(self) {
     previousCursor <- self@cursor - 1
     if(previousCursor == 0) {
-       message("Wrapping to end of playlist")
+       cat("Wrapping to end of playlist", "\n")
        self@cursor <- length(self@playlist) 
     } else {
         self@cursor <- previousCursor
     }
-    message("Playing previous song")
+    cat("Playing previous song", "\n")
     printCurrentSong(self)
     return(self)
 })
@@ -82,7 +82,7 @@ setMethod(f="addPlayNewSong", signature="Player", definition=function(self, song
 
 setMethod(f="listCurrentPlaylist", signature="Player", definition=function(self) {
     if(length(self@playlist) == 0) {
-        message("No songs in the current playlist")
+        cat("No songs in the current playlist", "\n")
         return(self)
     }
 
@@ -90,8 +90,8 @@ setMethod(f="listCurrentPlaylist", signature="Player", definition=function(self)
         printSong(song)
     }
     
-    message("\nCurrent: ")
-    # message("self@cursor: ", self@cursor)
+    cat("\nCurrent: ", "\n")
+    # cat("self@cursor: ", self@cursor, "\n")
     song <- self@playlist[[self@cursor]]
     printSong(song)
     return(self)
@@ -100,7 +100,7 @@ setMethod(f="listCurrentPlaylist", signature="Player", definition=function(self)
 
 
 player.display <- function() {
-  message("===== MUSIC PLAYER ===============================")
+  cat("===== MUSIC PLAYER ===============================", "\n")
 
   playlist <- c(
       PlayerSong(title="God's Plan", artist="Drake", rating=5),
@@ -126,10 +126,10 @@ player.display <- function() {
   selection <- ""
 
   while(TRUE) {
-     message("")
+     cat("\n")
      player <- printMenu(player)
      selection <- playerGetSelection()
-     message("")
+     cat("\n")
 
      if(selection == "F") {
         # Apparently in R we need to keep track of a class object, so returning it at the end of each method
@@ -152,7 +152,7 @@ player.display <- function() {
         break
      }
      else {
-         message("Didn't get that, please try again")
+         cat("Didn't get that, please try again", "\n")
      }
   }
 }

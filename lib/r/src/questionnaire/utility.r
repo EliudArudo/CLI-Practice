@@ -11,7 +11,7 @@ questionnaireStringIsValid <- function(string) {
 }
 
 questionnairemessageFieldErrorMessage <- function() {
-    message("Please try again, invalid input")
+    cat("Please try again, invalid input\n")
 }
 
 fetchUserEvaluationFn <- function(defaultMessage, correctQuestions) {
@@ -47,13 +47,13 @@ fetchUserEvaluationFn <- function(defaultMessage, correctQuestions) {
 
     isAllRounder <- developerRating[frontend,] >= failureLimit && developerRating[backend,] >= failureLimit && developerRating[devops,] >= failureLimit && developerRating[mobile,] >= failureLimit
 
-    # message("frontend developer: ",isFrontendDeveloper)
-    # message("backend developer: ",isBackendDeveloper)
-    # message("devops developer: ",isDevopsEngineer)
-    # message("mobile developer: ",isMobileDeveloper)
-    # message("fullstack developer: ",isFullStackDeveloper)
-    # message("software engineer: ",isSoftwareEngineer)
-    # message("all rounder: ",isAllRounder)
+    # cat("frontend developer: ",isFrontendDeveloper, "\n")
+    # cat("backend developer: ",isBackendDeveloper, "\n")
+    # cat("devops developer: ",isDevopsEngineer, "\n")
+    # cat("mobile developer: ",isMobileDeveloper, "\n")
+    # cat("fullstack developer: ",isFullStackDeveloper, "\n")
+    # cat("software engineer: ",isSoftwareEngineer, "\n")
+    # cat("all rounder: ",isAllRounder, "\n")
 
     if (isAllRounder) {
         message <- "WOW! Looks like we got an all rounder, congratulations!!!"

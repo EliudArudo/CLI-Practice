@@ -1,4 +1,4 @@
-source("src/player/utility.r")
+source("player/utility.r")
 
 PlayerSong <- setClass(
     "PlayerSong",
@@ -16,5 +16,5 @@ setGeneric(name="printSong", def=function(self) { standardGeneric("printSong")})
 setMethod(f="printSong", signature="PlayerSong", definition=function(self) {
     title <- playerPrintWithBuffer(self@title, 20)
     artist <- playerPrintWithBuffer(self@artist, 27)
-    message(title, " ", artist, " ", self@rating)
+    cat(title, " ", artist, " ", self@rating, "\n")
 })

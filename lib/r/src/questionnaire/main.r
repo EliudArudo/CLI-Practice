@@ -1,6 +1,6 @@
-source("src/questionnaire/questions.r")
-source("src/questionnaire/input_mod.r")
-source("src/questionnaire/utility.r")
+source("questionnaire/questions.r")
+source("questionnaire/input_mod.r")
+source("questionnaire/utility.r")
 
 Questionnaire <- setClass(
     "Questionnaire",
@@ -22,16 +22,16 @@ setGeneric(name="evaluateUser", def=function(self) { standardGeneric("evaluateUs
 
 # Implementations
 setMethod(f="initialize", signature="Questionnaire", definition=function(self) {
-    message(
-            "===== DEVELOPER TRIVIA ================================================")
-    message("Hi there! We have some questions for you: ")
-    message("Please answer them without looking.")
-    message("In case you don't know the answer, it's okay to choose option (D)")
-    message("=======================================================================")
+    cat(
+            "===== DEVELOPER TRIVIA ================================================", "\n")
+    cat("Hi there! We have some questions for you: ", "\n")
+    cat("Please answer them without looking.", "\n")
+    cat("In case you don't know the answer, it's okay to choose option (D)", "\n")
+    cat("=======================================================================", "\n")
 })
 
 setMethod(f="debugQuestion", signature="Questionnaire", definition=function(self, question) {
-    message("......... ", question@tag , " ..... (" , question@answer , ") ....................")
+    cat("......... ", question@tag , " ..... (" , question@answer , ") ....................", "\n")
     developerRating <- data.frame(row.names=c("frontend", "backend", "devops", "mobile"), val=c(0,0,0,0))
 
     for(question in self@correctQuestions) {
@@ -40,18 +40,18 @@ setMethod(f="debugQuestion", signature="Questionnaire", definition=function(self
     }
 
     for(i in 1:(nrow(developerRating))) {
-       message(row.names(developerRating)[i], " : ", developerRating[i,])
+       cat(row.names(developerRating)[i], " : ", developerRating[i,], "\n")
     }
 
-    message("......................................................")
+    cat("......................................................\n")
 })
 
 setMethod(f="printQuestion", signature="Questionnaire", definition=function(self, index, question) {
-    message(index, ". ", question@statement)
-    message("")
+    cat(index, ". ", question@statement, "\n")
+    cat("\n")
 
     for(choice in question@choices) {
-        message(choice@letter, ") ", choice@statement)
+        cat(choice@letter, ") ", choice@statement, "\n")
     }
 
     # Debug
@@ -100,7 +100,7 @@ setMethod(f="evaluateUser", signature="Questionnaire", definition=function(self)
    defaultMessage <- "You're a great developer, keep pushing!"
 
    message <- fetchUserEvaluation(self,defaultMessage, self@correctQuestions)
-   message(message)
+   cat(message, "\n")
 })
 
 
@@ -144,7 +144,7 @@ questionnaire.display <- function() {
     index <- 1
 
     while(index != length(questions)) {
-        message("")
+        cat("\n")
         popQuestion <- popAQuestion(questionnaire)
         # Using '[]' to index does not cut it, it returns a list from a vector
         questionnaire <- popQuestion[[1]]
@@ -161,7 +161,7 @@ questionnaire.display <- function() {
                 } else if (answer == "Q") {
                     break
                 } else {
-                    message("\nYour choice was invalid, please try again")
+                    cat("\nYour choice was invalid, please try again\n")
                     next
                 }
 
