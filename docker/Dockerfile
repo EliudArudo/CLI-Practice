@@ -1,5 +1,4 @@
-# FROM alpine:3.10
-FROM ubuntu:18.04
+FROM alpine:3.10
 
 # Install nodeJS
 RUN apk add --update nodejs npm
