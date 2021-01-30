@@ -99,7 +99,7 @@ console_app.on('close', (code) => {
 })
 
 console_app.stdin.write(`q\n`);
-console_app.kill('SIGINT')
+
 
 
 /*
