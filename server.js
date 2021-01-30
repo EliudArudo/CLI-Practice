@@ -8,7 +8,10 @@ const port = process.env.PORT || 3000
 /* 
   Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
 */
-let python = spawn('python', ['main.py'], {
+// let python = spawn('python', ['main.py'], {
+//     cwd: 'lib/python'
+// });
+let python = spawn('python3', ['main.py'], {
     cwd: 'lib/python'
 });
 
