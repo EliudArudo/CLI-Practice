@@ -48,9 +48,15 @@ RUN apk add R
 # NodeJS
 RUN node --version
 # Python
+RUN python -V
 # Java
+RUN java -version
 # Dart
 # C++
+RUN g++ --verison
 # Go
+RUN go version
 # Rust
+RUN rustc --version
 # R
+RUN R --version
