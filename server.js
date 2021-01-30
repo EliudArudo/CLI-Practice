@@ -8,9 +8,6 @@ const port = process.env.PORT || 3000
 // let python = spawn('python', ['main.py'], {
 //     cwd: 'lib/python'
 // });
-// let go_run = spawn("./go-cli-app.exe", [], {
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
 
 
 /* 
@@ -21,6 +18,9 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/python'
 // });
 
+// let dart = spawn('dart', ['lib/main.dart'], {
+//     cwd: 'lib/dart'
+// });
 
 // let nodejs = spawn('node', ['src/index.js'], {
 //     cwd: 'lib/nodejs'
@@ -37,10 +37,14 @@ const port = process.env.PORT || 3000
   ./go-cli-app.exe // or linux version
 */
 
-let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build . && ls", {
-    shell: true, // enables us to use &&
-    cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-});
+/* WORKING PROGRESS */
+// let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
+//     shell: true, // enables us to use &&
+//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+// });
+// let go_run = spawn("./go-cli-app.exe", [], {
+//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+// });
 
 
 /* 
@@ -57,9 +61,9 @@ let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .
 /* 
   Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
 */
-// let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
-//     cwd: 'lib/java'
-// })
+let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
+    cwd: 'lib/java'
+})
 
 
 /* 
@@ -71,67 +75,31 @@ let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .
 // })
 // r.stdin.write("source('main.r')\n");
 
-// let dart = spawn('dart', ['lib/main.dart'], { 
-//     cwd: 'lib/dart'
-// });
 
+let console_app = java
 
-let console_app_build = go_build
-
-console_app_build.stdout.on('data', function (data) {
+console_app.stdout.on('data', function (data) {
     console.log(data.toString())
 })
 
 
-let errChunksBuild = []
-console_app_build.stderr.on('data', function (data) {
-    errChunksBuild = errChunksBuild.concat(data);
+let errChunks = []
+console_app.stderr.on('data', function (data) {
+    errChunks = errChunks.concat(data);
 })
 
 
-console_app_build.stderr.on('end', function (data) {
-    var stderrContent = (Buffer.concat(errChunksBuild)).toString();
+console_app.stderr.on('end', function (data) {
+    var stderrContent = (Buffer.concat(errChunks)).toString();
     console.log(stderrContent);
 })
 
 
-console_app_build.on('close', (code) => {
+console_app.on('close', (code) => {
     console.log(`Closed with code: ${code}`)
 })
 
-
-setTimeout(() => {
-    let go_run = spawn("/go-cli-app", [], {
-        cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-    });
-
-    let console_app = go_run
-
-    console_app.stdout.on('data', function (data) {
-        console.log(data.toString())
-    })
-
-
-    let errChunks = []
-    console_app.stderr.on('data', function (data) {
-        errChunks = errChunks.concat(data);
-    })
-
-
-    console_app.stderr.on('end', function (data) {
-        var stderrContent = (Buffer.concat(errChunks)).toString();
-        console.log(stderrContent);
-    })
-
-
-    console_app.on('close', (code) => {
-        console.log(`Closed with code: ${code}`)
-    })
-
-
-    console_app.stdin.write(`q\n`);
-}, 1000 * 60 * 3)
-
+console_app.stdin.write(`q\n`);
 
 
 
