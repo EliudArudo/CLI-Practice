@@ -53,7 +53,7 @@ RUN python3 -V
 RUN java -version
 # Dart
 # C++
-RUN g++ --verison
+RUN g++ --version
 # Go
 RUN go version
 # Rust
