@@ -37,7 +37,7 @@ const port = process.env.PORT || 3000
   ./go-cli-app.exe // or linux version
 */
 
-let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
+let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build . && ls", {
     shell: true, // enables us to use &&
     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
 });
@@ -101,7 +101,7 @@ console_app_build.on('close', (code) => {
 
 
 setTimeout(() => {
-    let go_run = spawn("./go-cli-app", [], {
+    let go_run = spawn("/go-cli-app", [], {
         cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
     });
 
