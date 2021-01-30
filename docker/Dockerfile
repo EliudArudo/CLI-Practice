@@ -1,6 +1,6 @@
 FROM alpine:3.10
 
-# Install NodeJS
+# Install nodeJS
 RUN apk add --update nodejs npm
 
 #Install python
@@ -43,3 +43,14 @@ RUN apk add rust cargo
 
 #Install R
 RUN apk add R
+
+# Checks
+# NodeJS
+RUN node --version
+# Python
+# Java
+# Dart
+# C++
+# Go
+# Rust
+# R
