@@ -11,6 +11,10 @@ const port = process.env.PORT || 3000
 // let go_run = spawn("./go-cli-app.exe", [], {
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
 // });
+// let cpp_run = spawn("./main.exe", ["testing"], {
+//     cwd: 'lib/c++/bin'
+// });
+
 
 
 /* 
@@ -37,6 +41,14 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/java'
 // })
 
+// let r = spawn("R", ["--vanilla"], {
+//     cwd: "lib/r/src"
+// })
+// r.stdin.write("source('main.r')\n");
+
+// setTimeout(() => {
+//     r.stdin.write(`q\n`);
+// }, 2000)
 
 
 /* 
@@ -65,51 +77,105 @@ const port = process.env.PORT || 3000
 /* 
    Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
 */
-// let cpp_build = spawn("make", {
-//     shell: true, // enables us to use &&
-//     cwd: 'lib/c++'
-// });
-// let cpp_run = spawn("./main.exe", ["testing"], {
-//     cwd: 'lib/c++/bin'
-// });
+
+
 
 
 /* 
    Can also now use 'Rsript main.r' 
    Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
 */
-let r = spawn("R", ["--vanilla"], {
-    cwd: "lib/r/src"
-})
-r.stdin.write("source('main.r')\n");
+
+function build() {
+    let cpp_build = spawn("make", {
+        shell: true, // enables us to use &&
+        cwd: 'lib/c++'
+    });
+
+    let console_app = cpp_build
+
+    console_app.stdout.on('data', function (data) {
+        console.log(data.toString())
+    })
+
+
+    let errChunks = []
+    console_app.stderr.on('data', function (data) {
+        errChunks = errChunks.concat(data);
+    })
+
+
+    console_app.stderr.on('end', function (data) {
+        var stderrContent = (Buffer.concat(errChunks)).toString();
+        console.log(stderrContent);
+    })
+
+
+    console_app.on('close', (code) => {
+        console.log(`Closed with code: ${code}`)
+    })
+}
+
+function run() {
+    let cpp_run = spawn("./main", ["testing"], {
+        cwd: 'lib/c++/bin'
+    })
+
+    let console_app = cpp_run
+
+    console_app.stdout.on('data', function (data) {
+        console.log(data.toString())
+    })
+
+
+    let errChunks = []
+    console_app.stderr.on('data', function (data) {
+        errChunks = errChunks.concat(data);
+    })
+
+
+    console_app.stderr.on('end', function (data) {
+        var stderrContent = (Buffer.concat(errChunks)).toString();
+        console.log(stderrContent);
+    })
+
+
+    console_app.on('close', (code) => {
+        console.log(`Closed with code: ${code}`)
+    })
+
+    console_app.stdin.write(`q\n`);
+}
+
+build()
 
 setTimeout(() => {
-    r.stdin.write(`q\n`);
-}, 2000)
+    run()
+}, 1000 * 60 * 2)
 
 
-let console_app = r
+// let console_app = rust
 
-console_app.stdout.on('data', function (data) {
-    console.log(data.toString())
-})
-
-
-let errChunks = []
-console_app.stderr.on('data', function (data) {
-    errChunks = errChunks.concat(data);
-})
+// console_app.stdout.on('data', function (data) {
+//     console.log(data.toString())
+// })
 
 
-console_app.stderr.on('end', function (data) {
-    var stderrContent = (Buffer.concat(errChunks)).toString();
-    console.log(stderrContent);
-})
+// let errChunks = []
+// console_app.stderr.on('data', function (data) {
+//     errChunks = errChunks.concat(data);
+// })
 
 
-console_app.on('close', (code) => {
-    console.log(`Closed with code: ${code}`)
-})
+// console_app.stderr.on('end', function (data) {
+//     var stderrContent = (Buffer.concat(errChunks)).toString();
+//     console.log(stderrContent);
+// })
+
+
+// console_app.on('close', (code) => {
+//     console.log(`Closed with code: ${code}`)
+// })
 
 // console_app.stdin.write(`q\n`);
 
