@@ -8,6 +8,9 @@ const port = process.env.PORT || 3000
 // let python = spawn('python', ['main.py'], {
 //     cwd: 'lib/python'
 // });
+// let go_run = spawn("./go-cli-app.exe", [], {
+//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+// });
 
 
 /* 
@@ -18,9 +21,6 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/python'
 // });
 
-// let dart = spawn('dart', ['lib/main.dart'], {
-//     cwd: 'lib/dart'
-// });
 
 // let nodejs = spawn('node', ['src/index.js'], {
 //     cwd: 'lib/nodejs'
@@ -38,12 +38,19 @@ const port = process.env.PORT || 3000
 */
 
 /* WORKING PROGRESS */
+
 // let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
 //     shell: true, // enables us to use &&
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
 // });
-// let go_run = spawn("./go-cli-app.exe", [], {
+// let go_run = spawn("./go-cli-app", [], {
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+// });
+
+/* NOT YET SUPPORTED IN ALPINE LINUX */
+
+// let dart = spawn('dart', ['lib/main.dart'], {
+//     cwd: 'lib/dart'
 // });
 
 
