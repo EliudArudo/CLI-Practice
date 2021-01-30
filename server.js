@@ -87,7 +87,7 @@ const port = process.env.PORT || 3000
 */
 
 function build() {
-    let cpp_build = spawn("make && cd /bin && ls", {
+    let cpp_build = spawn("mkdir bin && make", {
         shell: true, // enables us to use &&
         cwd: 'lib/c++'
     });
