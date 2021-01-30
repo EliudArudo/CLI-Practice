@@ -8,6 +8,9 @@ const port = process.env.PORT || 3000
 // let python = spawn('python', ['main.py'], {
 //     cwd: 'lib/python'
 // });
+// let go_run = spawn("./go-cli-app.exe", [], {
+//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+// });
 
 
 /* 
@@ -98,7 +101,7 @@ console_app_build.on('close', (code) => {
 
 
 setTimeout(() => {
-    let go_run = spawn("./go-cli-app.exe", [], {
+    let go_run = spawn("./go-cli-app", [], {
         cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
     });
 
