@@ -50,3 +50,12 @@ RUN go version
 RUN rustc --version
 # R
 RUN R --version
+
+#Initializing the server
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 3000
+
+CMD npm start

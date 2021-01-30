@@ -92,6 +92,11 @@ console_app.on('close', (code) => {
     console.log(`Closed with code: ${code}`)
 })
 
+
+console_app.stdin.write(`q\n`);
+
+
+
 /* 
    Test using 'localhost:3000/<input>, e.g 1/2/3/a/b'
 */
