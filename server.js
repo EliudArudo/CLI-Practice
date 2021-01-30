@@ -50,6 +50,75 @@ const port = process.env.PORT || 3000
 //     r.stdin.write(`q\n`);
 // }, 2000)
 
+//
+// function build() {
+//     let cpp_build = spawn("mkdir bin && make", {
+//         shell: true, // enables us to use &&
+//         cwd: 'lib/c++'
+//     });
+
+//     let console_app = cpp_build
+
+//     console_app.stdout.on('data', function (data) {
+//         console.log(data.toString())
+//     })
+
+
+//     let errChunks = []
+//     console_app.stderr.on('data', function (data) {
+//         errChunks = errChunks.concat(data);
+//     })
+
+
+//     console_app.stderr.on('end', function (data) {
+//         var stderrContent = (Buffer.concat(errChunks)).toString();
+//         console.log(stderrContent);
+//     })
+
+
+//     console_app.on('close', (code) => {
+//         console.log(`Closed with code: ${code}`)
+//     })
+// }
+
+// function run() {
+//     let cpp_run = spawn("./main", ["testing"], {
+//         cwd: 'lib/c++/bin'
+//     })
+
+//     let console_app = cpp_run
+
+//     console_app.stdout.on('data', function (data) {
+//         console.log(data.toString())
+//     })
+
+
+//     let errChunks = []
+//     console_app.stderr.on('data', function (data) {
+//         errChunks = errChunks.concat(data);
+//     })
+
+
+//     console_app.stderr.on('end', function (data) {
+//         var stderrContent = (Buffer.concat(errChunks)).toString();
+//         console.log(stderrContent);
+//     })
+
+
+//     console_app.on('close', (code) => {
+//         console.log(`Closed with code: ${code}`)
+//     })
+
+//     console_app.stdin.write(`q\n`);
+// }
+
+// build()
+
+// setTimeout(() => {
+//     run()
+// }, 1000 * 60 * 2)
+//
+
 
 /* 
   cd into package, go mod init github.com...
@@ -87,12 +156,12 @@ const port = process.env.PORT || 3000
 */
 
 function build() {
-    let cpp_build = spawn("mkdir bin && make", {
+    let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && ls && go build . && ls", {
         shell: true, // enables us to use &&
-        cwd: 'lib/c++'
+        cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
     });
 
-    let console_app = cpp_build
+    let console_app = go_build
 
     console_app.stdout.on('data', function (data) {
         console.log(data.toString())
@@ -117,11 +186,11 @@ function build() {
 }
 
 function run() {
-    let cpp_run = spawn("./main", ["testing"], {
-        cwd: 'lib/c++/bin'
-    })
+    let go_run = spawn("ls && ./go-cli-app", [], {
+        cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+    });
 
-    let console_app = cpp_run
+    let console_app = go_run
 
     console_app.stdout.on('data', function (data) {
         console.log(data.toString())
