@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000
 /* 
   Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
 */
-/* Production environment */
+/* WORKING ON DOCKER CONTAINER */
 // let python = spawn('python3', ['main.py'], {
 //     cwd: 'lib/python'
 // });
@@ -29,6 +29,14 @@ const port = process.env.PORT || 3000
 // let rust = spawn('cargo', ['run'], {
 //     cwd: 'lib/rust'
 // });
+
+/* 
+  Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
+*/
+// let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
+//     cwd: 'lib/java'
+// })
+
 
 
 /* 
@@ -65,25 +73,18 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/c++/bin'
 // });
 
-/* 
-  Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
-*/
-let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
-    cwd: 'lib/java'
-})
-
 
 /* 
    Can also now use 'Rsript main.r' 
    Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
 */
-// let r = spawn("R", ["--vanilla"], {
-//     cwd: "lib/r/src"
-// })
-// r.stdin.write("source('main.r')\n");
+let r = spawn("R", ["--vanilla"], {
+    cwd: "lib/r/src"
+})
+r.stdin.write("source('main.r')\n");
 
 
-let console_app = java
+let console_app = r
 
 console_app.stdout.on('data', function (data) {
     console.log(data.toString())
