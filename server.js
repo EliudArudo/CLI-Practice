@@ -18,9 +18,6 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/python'
 // });
 
-// let dart = spawn('dart', ['lib/main.dart'], {
-//     cwd: 'lib/dart'
-// });
 
 // let nodejs = spawn('node', ['src/index.js'], {
 //     cwd: 'lib/nodejs'
@@ -74,6 +71,11 @@ let go_run = spawn("./go-cli-app.exe", [], {
 // })
 // r.stdin.write("source('main.r')\n");
 
+// let dart = spawn('dart', ['lib/main.dart'], { 
+//     cwd: 'lib/dart'
+// });
+
+
 let console_app_build = go_build
 
 console_app_build.stdout.on('data', function (data) {
@@ -81,14 +83,14 @@ console_app_build.stdout.on('data', function (data) {
 })
 
 
-let errChunks = []
+let errChunksBuild = []
 console_app_build.stderr.on('data', function (data) {
-    errChunks = errChunks.concat(data);
+    errChunksBuild = errChunksBuild.concat(data);
 })
 
 
 console_app_build.stderr.on('end', function (data) {
-    var stderrContent = (Buffer.concat(errChunks)).toString();
+    var stderrContent = (Buffer.concat(errChunksBuild)).toString();
     console.log(stderrContent);
 })
 
