@@ -4,24 +4,27 @@ const { spawn } = require('child_process')
 const app = express()
 const port = process.env.PORT || 3000
 
+/* Dev environment on Windows */
+// let python = spawn('python', ['main.py'], {
+//     cwd: 'lib/python'
+// });
+
 
 /* 
   Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
 */
-// let python = spawn('python', ['main.py'], {
+/* Production environment */
+// let python = spawn('python3', ['main.py'], {
 //     cwd: 'lib/python'
 // });
-let python = spawn('python3', ['main.py'], {
-    cwd: 'lib/python'
-});
 
 // let dart = spawn('dart', ['lib/main.dart'], {
 //     cwd: 'lib/dart'
 // });
 
-// let nodejs = spawn('node', ['src/index.js'], {
-//     cwd: 'lib/nodejs'
-// });
+let nodejs = spawn('node', ['src/index.js'], {
+    cwd: 'lib/nodejs'
+});
 
 // let rust = spawn('cargo', ['run'], {
 //     cwd: 'lib/rust'
@@ -72,7 +75,7 @@ let python = spawn('python3', ['main.py'], {
 // r.stdin.write("source('main.r')\n");
 
 
-let console_app = python
+let console_app = nodejs
 
 console_app.stdout.on('data', function (data) {
     console.log(data.toString())
@@ -95,22 +98,22 @@ console_app.on('close', (code) => {
     console.log(`Closed with code: ${code}`)
 })
 
-
 console_app.stdin.write(`q\n`);
+console_app.kill('SIGINT')
 
 
-
-/* 
+/*
    Test using 'localhost:3000/<input>, e.g 1/2/3/a/b'
 */
-app.get('/send/:val', (req, res) => {
-    const val = req.params.val
-    console_app.stdin.write(`${val}\n`);
 
-    res.send()
-})
+// app.get('/send/:val', (req, res) => {
+//     const val = req.params.val
+//     console_app.stdin.write(`${val}\n`);
+
+//     res.send()
+// })
 
 
-app.listen(port, () => {
-    console.log(`Express listening on port: ${port}`)
-})
+// app.listen(port, () => {
+//     console.log(`Express listening on port: ${port}`)
+// })
