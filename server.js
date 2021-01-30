@@ -26,9 +26,9 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/nodejs'
 // });
 
-let rust = spawn('cargo', ['run'], {
-    cwd: 'lib/rust'
-});
+// let rust = spawn('cargo', ['run'], {
+//     cwd: 'lib/rust'
+// });
 
 
 /* 
@@ -37,13 +37,13 @@ let rust = spawn('cargo', ['run'], {
   ./go-cli-app.exe // or linux version
 */
 
-// let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
-//     shell: true, // enables us to use &&
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
-// let go_run = spawn("./go-cli-app.exe", [], {
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
+let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
+    shell: true, // enables us to use &&
+    cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+});
+let go_run = spawn("./go-cli-app.exe", [], {
+    cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+});
 
 
 /* 
