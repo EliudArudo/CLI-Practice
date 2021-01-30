@@ -75,7 +75,7 @@ let go_run = spawn("./go-cli-app.exe", [], {
 // r.stdin.write("source('main.r')\n");
 
 
-let console_app = rust
+let console_app = go_run
 
 console_app.stdout.on('data', function (data) {
     console.log(data.toString())
