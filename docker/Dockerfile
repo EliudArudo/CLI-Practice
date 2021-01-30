@@ -48,7 +48,7 @@ RUN apk add R
 # NodeJS
 RUN node --version
 # Python
-RUN python -V
+RUN python3 -V
 # Java
 RUN java -version
 # Dart
