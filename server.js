@@ -22,13 +22,13 @@ const port = process.env.PORT || 3000
 //     cwd: 'lib/dart'
 // });
 
-let nodejs = spawn('node', ['src/index.js'], {
-    cwd: 'lib/nodejs'
-});
-
-// let rust = spawn('cargo', ['run'], {
-//     cwd: 'lib/rust'
+// let nodejs = spawn('node', ['src/index.js'], {
+//     cwd: 'lib/nodejs'
 // });
+
+let rust = spawn('cargo', ['run'], {
+    cwd: 'lib/rust'
+});
 
 
 /* 
@@ -75,7 +75,7 @@ let nodejs = spawn('node', ['src/index.js'], {
 // r.stdin.write("source('main.r')\n");
 
 
-let console_app = nodejs
+let console_app = rust
 
 console_app.stdout.on('data', function (data) {
     console.log(data.toString())
@@ -106,14 +106,14 @@ console_app.stdin.write(`q\n`);
    Test using 'localhost:3000/<input>, e.g 1/2/3/a/b'
 */
 
-// app.get('/send/:val', (req, res) => {
-//     const val = req.params.val
-//     console_app.stdin.write(`${val}\n`);
+app.get('/send/:val', (req, res) => {
+    const val = req.params.val
+    console_app.stdin.write(`${val}\n`);
 
-//     res.send()
-// })
+    res.send()
+})
 
 
-// app.listen(port, () => {
-//     console.log(`Express listening on port: ${port}`)
-// })
+app.listen(port, () => {
+    console.log(`Express listening on port: ${port}`)
+})
