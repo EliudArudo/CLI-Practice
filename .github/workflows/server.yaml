@@ -1,0 +1,24 @@
+name: Image size
+
+on:
+    push:
+        branches:
+        - master
+        paths:
+        - docker/**
+jobs:
+    deploy:
+        name: Deploy job
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the repository
+              uses: actions/checkout@v1
+
+            - name: Build Docker image  
+              working-directory: docker
+              run: |
+                docker build . --tag server/image:${{ github.sha }}
+
+            - name: Check size of image    
+              run: |
+                docker images server/image

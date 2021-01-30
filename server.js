@@ -4,6 +4,10 @@ const { spawn } = require('child_process')
 const app = express()
 const port = process.env.PORT || 3000
 
+
+/* 
+  Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
+*/
 let python = spawn('python', ['main.py'], {
     cwd: 'lib/python'
 });
@@ -35,6 +39,10 @@ let python = spawn('python', ['main.py'], {
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
 // });
 
+
+/* 
+   Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
+*/
 // let cpp_build = spawn("make", {
 //     shell: true, // enables us to use &&
 //     cwd: 'lib/c++'
@@ -43,10 +51,18 @@ let python = spawn('python', ['main.py'], {
 //     cwd: 'lib/c++/bin'
 // });
 
+/* 
+  Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
+*/
 // let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
 //     cwd: 'lib/java'
 // })
 
+
+/* 
+   Can also now use 'Rsript main.r' 
+   Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
+*/
 // let r = spawn("R", ["--vanilla"], {
 //     cwd: "lib/r/src"
 // })
