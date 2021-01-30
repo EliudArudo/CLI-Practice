@@ -82,7 +82,10 @@ let r = spawn("R", ["--vanilla"], {
     cwd: "lib/r/src"
 })
 r.stdin.write("source('main.r')\n");
-r.stdin.write(`q\n`);
+
+setTimeout(() => {
+    r.stdin.write(`q\n`);
+}, 2000)
 
 
 let console_app = r
