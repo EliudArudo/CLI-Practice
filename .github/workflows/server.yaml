@@ -20,3 +20,11 @@ jobs:
             - name: Check size of image    
               run: |
                 docker images server/image
+
+            - name: Test running of container
+              run: |
+                docker run --name server server/image:${{ github.sha }}
+
+            - name: Stop running container
+              run: |
+                docker kill server
