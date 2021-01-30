@@ -10,7 +10,7 @@ RUN apk add --no-cache python3 py3-pip
 RUN apk add openjdk11
 
 #Install Dart
-RUN sudo apk add gzip
+RUN apk add gzip
 RUN apk add bash curl file git
 RUN git clone https://github.com/flutter/flutter.git
 ENV PATH="$PATH:/flutter/bin"
