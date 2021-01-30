@@ -25,7 +25,7 @@ RUN apk add openjdk11
 # ENV DART_SDK /usr/lib/dart
 # ENV PATH $DART_SDK/bin:/root/.pub-cache/bin:$PATH
 
-RUN apk add bash curl file git zip
+RUN apk add bash curl file git gzip
 RUN git clone https://github.com/flutter/flutter.git
 ENV PATH="$PATH:/flutter/bin"
 RUN flutter channel stable
