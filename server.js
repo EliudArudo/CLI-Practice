@@ -50,7 +50,7 @@ const port = process.env.PORT || 3000
 //     r.stdin.write(`q\n`);
 // }, 2000)
 
-//
+// C++ build + run
 // function build() {
 //     let cpp_build = spawn("mkdir bin && make", {
 //         shell: true, // enables us to use &&
@@ -119,22 +119,74 @@ const port = process.env.PORT || 3000
 // }, 1000 * 60 * 2)
 //
 
+// Go build + run
+// function build() {
+//     let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
+//         shell: true, // enables us to use &&
+//         cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+//     });
 
-/* 
-  cd into package, go mod init github.com...
-  go build
-  ./go-cli-app.exe // or linux version
-*/
+//     let console_app = go_build
 
-/* WORKING PROGRESS */
+//     console_app.stdout.on('data', function (data) {
+//         console.log(data.toString())
+//     })
 
-// let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && ls && go build . && ls", {
-//     shell: true, // enables us to use &&
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
-// let go_run = spawn("./go-cli-app", [], {
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
+
+//     let errChunks = []
+//     console_app.stderr.on('data', function (data) {
+//         errChunks = errChunks.concat(data);
+//     })
+
+
+//     console_app.stderr.on('end', function (data) {
+//         var stderrContent = (Buffer.concat(errChunks)).toString();
+//         console.log(stderrContent);
+//     })
+
+
+//     console_app.on('close', (code) => {
+//         console.log(`Closed with code: ${code}`)
+//     })
+// }
+
+// function run() {
+//     let go_run = spawn("./go-cli-app", [], {
+//         cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+//     });
+
+//     let console_app = go_run
+
+//     console_app.stdout.on('data', function (data) {
+//         console.log(data.toString())
+//     })
+
+
+//     let errChunks = []
+//     console_app.stderr.on('data', function (data) {
+//         errChunks = errChunks.concat(data);
+//     })
+
+
+//     console_app.stderr.on('end', function (data) {
+//         var stderrContent = (Buffer.concat(errChunks)).toString();
+//         console.log(stderrContent);
+//     })
+
+
+//     console_app.on('close', (code) => {
+//         console.log(`Closed with code: ${code}`)
+//     })
+
+//     console_app.stdin.write(`q\n`);
+// }
+
+// build()
+
+// setTimeout(() => {
+//     run()
+// }, 1000 * 60 * 2)
+//
 
 /* NOT YET SUPPORTED IN ALPINE LINUX */
 
@@ -147,16 +199,13 @@ const port = process.env.PORT || 3000
    Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
 */
 
-
-
-
 /* 
    Can also now use 'Rsript main.r' 
    Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
 */
 
 function build() {
-    let go_build = spawn("ls && go mod init github.com/eliudarudo/go-cli-app && go build . && ls", {
+    let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
         shell: true, // enables us to use &&
         cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
     });
