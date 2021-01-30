@@ -1,5 +1,4 @@
-# FROM alpine:3.10
-FROM google/dart
+FROM alpine:3.10
 
 # Install nodeJS
 RUN apk add --update nodejs npm
