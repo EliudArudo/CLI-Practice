@@ -74,6 +74,29 @@ let go_run = spawn("./go-cli-app.exe", [], {
 // })
 // r.stdin.write("source('main.r')\n");
 
+let console_app_build = go_build
+
+console_app_build.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
+
+
+let errChunks = []
+console_app_build.stderr.on('data', function (data) {
+    errChunks = errChunks.concat(data);
+})
+
+
+console_app_build.stderr.on('end', function (data) {
+    var stderrContent = (Buffer.concat(errChunks)).toString();
+    console.log(stderrContent);
+})
+
+
+console_app_build.on('close', (code) => {
+    console.log(`Closed with code: ${code}`)
+})
+
 
 let console_app = go_run
 
@@ -98,7 +121,11 @@ console_app.on('close', (code) => {
     console.log(`Closed with code: ${code}`)
 })
 
-console_app.stdin.write(`q\n`);
+
+setTimeout(() => {
+    console_app.stdin.write(`q\n`);
+}, 1000 * 60 * 3)
+
 
 
 
