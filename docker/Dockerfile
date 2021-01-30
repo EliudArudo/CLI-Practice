@@ -1,4 +1,5 @@
-FROM alpine:3.10
+# FROM alpine:3.10
+FROM google/dart
 
 # Install nodeJS
 RUN apk add --update nodejs npm
@@ -10,10 +11,10 @@ RUN apk add --no-cache python3 py3-pip
 RUN apk add openjdk11
 
 #Install Dart
-RUN apk add --no-cache bash file git curl curl-dev
-RUN git clone https://github.com/flutter/flutter.git
-ENV PATH="$PATH:/flutter/bin"
-RUN flutter channel stable
+# RUN apk add --no-cache bash file git curl curl-dev
+# RUN git clone https://github.com/flutter/flutter.git
+# ENV PATH="$PATH:/flutter/bin"
+# RUN flutter channel stable
 
 #Install C++
 RUN apk --no-cache --update add build-base
