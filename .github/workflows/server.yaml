@@ -4,8 +4,7 @@ on:
     push:
         branches:
         - master
-        paths:
-        - docker/**
+
 jobs:
     deploy:
         name: Deploy job
@@ -14,8 +13,7 @@ jobs:
             - name: Checkout the repository
               uses: actions/checkout@v1
 
-            - name: Build Docker image  
-              working-directory: docker
+            - name: Build Docker image
               run: |
                 docker build . --tag server/image:${{ github.sha }}
 
