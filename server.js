@@ -47,7 +47,7 @@ const port = process.env.PORT || 3000
 
 /* WORKING PROGRESS */
 
-// let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && go build .", {
+// let go_build = spawn("go mod init github.com/eliudarudo/go-cli-app && ls && go build . && ls", {
 //     shell: true, // enables us to use &&
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
 // });
@@ -82,6 +82,7 @@ let r = spawn("R", ["--vanilla"], {
     cwd: "lib/r/src"
 })
 r.stdin.write("source('main.r')\n");
+r.stdin.write(`q\n`);
 
 
 let console_app = r
@@ -107,7 +108,7 @@ console_app.on('close', (code) => {
     console.log(`Closed with code: ${code}`)
 })
 
-console_app.stdin.write(`q\n`);
+// console_app.stdin.write(`q\n`);
 
 
 
