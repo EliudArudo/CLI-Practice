@@ -41,11 +41,9 @@ app.listen(port, async () => {
     console.log(`Express listening on port: ${port}`)
 
     // const userID = 'elly'
-    // const app = AppManager._spawnNewPython(userID)
     // const messages = await AppManager.createNewUserProcesses(userID)
-
     // console.log(messages.cpp)
-
+    // const app = AppManager.fetchUserProcess(userID, 'python')
 
     // NOTE await app.fetchOutput in the beginning and after entering command
     // let message = await app.fetchOutput()

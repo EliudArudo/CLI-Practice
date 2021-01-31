@@ -42,7 +42,7 @@ module.exports = class {
     }
 
     static fetchUserProcess(userID, type) {
-        return this.processes.filter(app => app.userID === userID && app.type === type)[0]
+        return this.processes.filter(app => app.userID === userID && app.type[type])[0]
     }
 
 
@@ -57,13 +57,9 @@ module.exports = class {
     }
 
     static _spawnNewPython(userID) {
-        // windows - do 'python'
         const python = spawn('python', ['main.py'], {
             cwd: 'lib/python'
         })
-        // const python = spawn('python3', ['main.py'], {
-        //     cwd: 'lib/python'
-        // })
         return this._pushAndReturnApp({ process: python, userID, name: 'python' })
     }
 
