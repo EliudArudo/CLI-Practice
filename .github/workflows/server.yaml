@@ -23,4 +23,4 @@ jobs:
 
             - name: Run container and test
               run: |
-                docker run server/image:${{ github.sha }}
+                docker run --env JWT_SECRET=${{ secrets.JWT_SECRET }} --env JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} server/image:${{ github.sha }}

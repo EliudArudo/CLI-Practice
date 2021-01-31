@@ -49,7 +49,7 @@ module.exports = class {
     }
 
     static userProcessExists(userID) {
-        return this.processes.indexOf(app => app.userID === userID) >= 0
+        return this.processes.filter(app => app.userID === userID).length > 0
     }
 
     static fetchUserProcess(userID, type) {
