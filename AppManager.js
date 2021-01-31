@@ -38,8 +38,8 @@ module.exports = class {
         return this.processes.indexOf(app => app.userID === userID) >= 0
     }
 
-    static fetchUserProcess(userID, name) {
-
+    static fetchUserProcess(userID, type) {
+        return this.processes.filter(app => app.userID === userID && app.type === type)[0]
     }
 
 

@@ -5,7 +5,7 @@ RUN apk add --update nodejs npm
 
 #Install python
 RUN apk add --no-cache python3 py3-pip
-RUN echo 'alias python="/usr/bin/python3"' >> ~/.bashrc
+RUN ls /usr/bin/python3
 
 #Install Java
 RUN apk add openjdk11
