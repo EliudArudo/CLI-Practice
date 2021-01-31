@@ -10,6 +10,7 @@ const server = http.createServer(app)
 const IO = socketIO(server)
 
 const { verifyToken, attachIDToToken } = require('./middleware')
+const { getToken } = require('./util')
 const AppManager = require('./AppManager')
 
 const PORT = process.env.PORT || 3000
@@ -35,7 +36,8 @@ IO.on('connection', async socket => {
   })
 
   const messages = await AppManager.createNewUserProcesses(userID)
-  socket.emit('console-messages', messages)
+  const token = getToken()
+  socket.emit('console-messages', { messages, token })
 })
 
 
