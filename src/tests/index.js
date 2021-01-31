@@ -1,4 +1,4 @@
-const AppManager = require('../AppManager')
+const AppManager = require('../util/AppManager')
 
 function testSingleAppInit() {
     return new Promise(async resolve => {
