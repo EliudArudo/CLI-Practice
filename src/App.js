@@ -1,6 +1,6 @@
 module.exports = class {
     constructor(process, userID, type) {
-        if (type.r)
+        if (type === 'r')
             process.stdin.write("source('main.r')\n")
 
         this._process = process
@@ -8,6 +8,7 @@ module.exports = class {
         this._message = ""
         this._selection = ""
         this._type = type
+        this._closed = false
 
         this._setup()
     }
@@ -18,6 +19,10 @@ module.exports = class {
 
     get type() {
         return this._type
+    }
+
+    get isClosed() {
+        return this._closed
     }
 
     _setup() {
@@ -76,6 +81,7 @@ module.exports = class {
             // console.log({ indexOfIndex })
             // console.log({ at1: indices[indexOfIndex - 1], at2: indices[indexOfIndex] })
             indice = indices[indexOfIndex - 1]
+            this._closed = true
         }
 
         array.splice(indice + 1, 0, ` ${this._selection}`)

@@ -47,12 +47,11 @@ app.get('/', (req, res) => {
 })
 
 // PRODUCTION
-app.post('/console/apps/:type/:token', verifyToken, attachIDToToken, async (req, res) => {
+app.post('/console/apps/:type/command/:token', verifyToken, attachIDToToken, async (req, res) => {
   // DEVELOPMENT
-  // app.post('/console/apps/:type/:userID', verifyToken, attachIDToToken, async (req, res) => {
+  // app.post('/console/apps/:type/command/:userID', async (req, res) => {
   try {
-    const { type } = req.params
-    const { userID, command } = req.body
+
 
     // DEVELOPMENT
     // const { type, userID } = req.params
@@ -63,27 +62,51 @@ app.post('/console/apps/:type/:token', verifyToken, attachIDToToken, async (req,
 
     // if (!AppManager.userProcessExists(userID)) {
     //   await AppManager.createNewUserProcesses(userID)
-
     //   app = await AppManager.fetchUserProcess(userID, type)
     //   await app.fetchOutput()
-    //   app.enterCommand(command)
-    //   message = await app.fetchOutput()
-    // } else {
-
+    // } else
     //   app = await AppManager.fetchUserProcess(userID, type)
 
-    //   app.enterCommand(command)
-    //   message = await app.fetchOutput()
-    // }
-    // DEVELOPMENT
+    // app.enterCommand(command)
+    // message = await app.fetchOutput()
+
+    // PRODUCTION
+    const { type } = req.params
+    const { userID, command } = req.body
 
     app = await AppManager.fetchUserProcess(userID, type)
 
     app.enterCommand(command)
-    const message = await app.fetchOutput()
+    message = await app.fetchOutput()
+    // // Disable the send command button is isClosed === true
+    // // Meaning enable the refresh button which will use the route below
+
+    res.send({ message, isClosed: app.isClosed })
+  } catch (e) {
+    console.log(e)
+    res.status(500).send('Sorry, the error is being fixed as fast as possible')
+  }
+})
+
+// PRODUCTION
+app.post('/console/apps/:type/refresh/:token', verifyToken, attachIDToToken, async (req, res) => {
+  // DEVELOPMENT
+  // app.post('/console/apps/:type/refresh/:userID', async (req, res) => {
+  try {
+
+    // DEVELOPMENT
+    // const { type, userID } = req.params
+
+    // PRODUCTION
+    const { type } = req.params
+    const { userID } = req.body
+
+    const app = await AppManager.fetchUserProcess(userID, type)
+    const message = await AppManager.spawnNewUserProcess(app)
 
     res.send(message)
   } catch (e) {
+    console.log(e)
     res.status(500).send('Sorry, the error is being fixed as fast as possible')
   }
 })
