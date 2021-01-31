@@ -54,7 +54,6 @@ module.exports = class {
     _getModifiedMessage() {
         let array = this._message.split(/(Selection:)|(\(Q to quit\):)|(Thanks for playing our games!)/)
         array = array.filter(Boolean)
-        // console.log({ array })
 
         let indices = []
 
@@ -88,9 +87,7 @@ module.exports = class {
     fetchOutput() {
         return new Promise(async resolve => {
             await this._delay(2000)
-
             this._message = this._getModifiedMessage()
-
             resolve(this._message)
         })
     }
