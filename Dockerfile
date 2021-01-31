@@ -5,9 +5,7 @@ RUN apk add --update nodejs npm
 
 #Install python
 RUN apk add --no-cache python3 py3-pip
-
-COPY usr/bin/python3 usr/bin/python
-
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 #Install Java
 RUN apk add openjdk11
