@@ -19,7 +19,7 @@ module.exports.buildCPP = function () {
         });
 
         cppBuildProcess.stdout.on('data', function (data) {
-            console.log('CPP Build Success: \n', data.toString())
+            // console.log('CPP Build Success: \n', data.toString())
         })
 
 
@@ -31,12 +31,12 @@ module.exports.buildCPP = function () {
 
         cppBuildProcess.stderr.on('end', function () {
             const stderrContent = (Buffer.concat(errChunks)).toString();
-            console.log('CPP Build Message: \n', stderrContent);
+            // console.log('CPP Build Message: \n', stderrContent);
         })
 
 
         cppBuildProcess.on('close', (code) => {
-            console.log(`CPP Build: Closed with code: ${code}`)
+            // console.log(`CPP Build: Closed with code: ${code}`)
             cppBuildProcess.kill('SIGINT')
             resolve(code === 0)
         })
@@ -61,7 +61,7 @@ module.exports.buildGo = function () {
         });
 
         goBuildProcess.stdout.on('data', function (data) {
-            console.log('Go Build Success: \n', data.toString())
+            // console.log('Go Build Success: \n', data.toString())
         })
 
 
@@ -73,12 +73,12 @@ module.exports.buildGo = function () {
 
         goBuildProcess.stderr.on('end', function () {
             const stderrContent = (Buffer.concat(errChunks)).toString();
-            console.log('Go Build Message: \n', stderrContent);
+            // console.log('Go Build Message: \n', stderrContent);
         })
 
 
         goBuildProcess.on('close', (code) => {
-            console.log(`Go Build: Closed with code: ${code}`)
+            // console.log(`Go Build: Closed with code: ${code}`)
             goBuildProcess.kill('SIGINT')
             resolve(code === 0)
         })
