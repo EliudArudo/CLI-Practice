@@ -1,6 +1,6 @@
 const AppManager = require('../AppManager')
 
-module.exports.testSingleAppInit = async function () {
+async function testSingleAppInit() {
     const userID = 'userID1'
     const messages = await AppManager.createNewUserProcesses(userID)
     // console.log(messages.cpp)
@@ -24,6 +24,13 @@ module.exports.testSingleAppInit = async function () {
     // console.log(message)
 
     AppManager.cleanUserApps(userID)
+}
+
+
+async function runTests() {
+    await testSingleAppInit()
 
     process.exit(0)
 }
+
+runTests()

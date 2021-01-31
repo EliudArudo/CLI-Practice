@@ -5,8 +5,6 @@ const socketIO = require('socket.io')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-const { testSingleAppInit } = require('./tests')
-
 const app = express()
 const server = http.createServer(app)
 
@@ -33,5 +31,4 @@ app.get('/send/:val', (req, res) => {
 
 server.listen(PORT, async () => {
   console.log(`Express listening on port: ${PORT}`)
-  testSingleAppInit()
 })

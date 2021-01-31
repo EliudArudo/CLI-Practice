@@ -4,12 +4,10 @@ on:
     push:
         branches:
         - master
-        paths:
-        - src/*
 
 jobs:
-    deploy:
-        name: Deploy job
+    ci:
+        name: Run tests
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the repository
@@ -17,16 +15,12 @@ jobs:
 
             - name: Build Docker image
               run: |
-                docker build . --tag server/image:${{ github.sha }}
+                docker build  --tag server/image:${{ github.sha }} -f test.Dockerfile .
 
             - name: Check size of image    
               run: |
                 docker images server/image
 
-            - name: Test running of container
+            - name: Run container and test
               run: |
-                docker run --name server server/image:${{ github.sha }}
-
-            - name: Stop running container
-              run: |
-                docker kill server
+                docker run server/image:${{ github.sha }}
