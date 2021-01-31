@@ -33,24 +33,6 @@ function testAllAppsInit() {
     })
 }
 
-let loading
-
-function startLoading() {
-    loading = (function () {
-        const P = ['\\', '|', '/', '-'];
-        let x = 0;
-
-        return setInterval(() => {
-            process.stdout.write(`\r${P[x++]}`);
-            x %= P.length;
-        }, 300);
-    })();
-}
-
-function stopLoading() {
-    clearInterval(loading)
-}
-
 function testOneAppMultipleInputs() {
     return new Promise(async resolve => {
         console.log('\nONE-APP-MULTIPLE-COMMANDS-TEST \n-----------------------------------')
@@ -59,10 +41,7 @@ function testOneAppMultipleInputs() {
 
         const app = AppManager.fetchUserProcess(USER_ID_3, 'cpp')
 
-        console.log('\nRunning commands, please wait...')
-
         let message = await app.fetchOutput()
-        startLoading()
         app.enterCommand('1')
         message = await app.fetchOutput()
         app.enterCommand('F')
@@ -77,8 +56,7 @@ function testOneAppMultipleInputs() {
         message = await app.fetchOutput()
         app.enterCommand('q')
         message = await app.fetchOutput()
-        stopLoading()
-        console.log('\n\nCPP \n----')
+        console.log('\nCPP \n----')
         console.log(message)
         AppManager.cleanUserApps(USER_ID_3)
 
@@ -88,8 +66,8 @@ function testOneAppMultipleInputs() {
 
 
 async function runTests() {
-    // await testSingleAppInit()
-    // await testAllAppsInit()
+    await testSingleAppInit()
+    await testAllAppsInit()
     await testOneAppMultipleInputs()
 
     process.exit(0)
