@@ -1,16 +1,26 @@
 module.exports = class {
-    constructor(process, { userID = '', isR = false }) {
-        if (isR)
+    constructor(process, userID, type) {
+        if (type.r)
             process.stdin.write("source('main.r')\n")
 
         this._process = process
         this._userID = userID
         this._message = ""
         this._selection = ""
-        this.setup()
+        this._type = type
+
+        this._setup()
     }
 
-    setup() {
+    get userID() {
+        return this._userID
+    }
+
+    get type() {
+        return this._type
+    }
+
+    _setup() {
         console.log(`Launching process with PID: ${this._process.pid}`)
         this._process.stdout.on('data', data => {
             // console.log(data.toString())
@@ -24,11 +34,11 @@ module.exports = class {
 
         this._process.stderr.on('end', () => {
             const stderrContent = (Buffer.concat(errChunks)).toString();
-            console.log(stderrContent);
+            // console.log(stderrContent);
         })
 
         this._process.on('close', code => {
-            console.log(`Closed with code: ${code}`)
+            // console.log(`Closed with code: ${code ? code : 0}`)
         })
     }
 
@@ -72,14 +82,14 @@ module.exports = class {
         array.splice(indice + 1, 0, ` ${this._selection}`)
         // console.log(array.join(""))
 
-        return array.join("")
+        return array.join("") + "\n"
     }
 
     fetchOutput() {
         return new Promise(async resolve => {
             await this._delay(2000)
 
-            this._message = this._getModifiedMessage() + "\n"
+            this._message = this._getModifiedMessage()
 
             resolve(this._message)
         })

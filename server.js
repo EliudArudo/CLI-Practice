@@ -1,11 +1,12 @@
 const express = require('express')
-const { spawn } = require('child_process')
 
 const app = express()
 const port = process.env.PORT || 3000
 
-const App = require('./CLIApplet')
+
 const { buildCPP, buildGo } = require('./buildExecutables')
+const AppManager = require('./AppManager')
+
 
 let CPP_BUILD = false
 let GO_BUILD = false
@@ -21,20 +22,23 @@ let GO_BUILD = false
   Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
   Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
   Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
+
+  Fastest way to fetch object from an array
+  https://stackoverflow.com/questions/10557486/in-an-array-of-objects-fastest-way-to-find-the-index-of-an-object-whose-attribu
 */
 
 /* FOR DOCKER ALPINE */
 // let python = spawn('python3', ['main.py'], {
 //     cwd: 'lib/python'
-// });
+// })
 
 // let nodejs = spawn('node', ['src/index.js'], {
 //     cwd: 'lib/nodejs'
-// });
+// })
 
 // let rust = spawn('cargo', ['run'], {
 //     cwd: 'lib/rust'
-// });
+// })
 
 // let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
 //     cwd: 'lib/java'
@@ -46,12 +50,11 @@ let GO_BUILD = false
 
 // let go = spawn("./go-cli-app", [], {
 //     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// });
+// })
 
 // let cpp = spawn("./main", ["testing"], {
 //     cwd: 'lib/c++/bin'
 // })
-
 
 
 /* NOT YET SUPPORTED ON ALPINE LINUX */
@@ -83,23 +86,27 @@ app.listen(port, async () => {
     console.log(`Express listening on port: ${port}`)
     // buildExecutables()
 
-    // const process = new App(cpp, { isR: false })
-    // const process = new App(r, { isR: true })
+    const userID = 'elly'
+    const app = AppManager._spawnNewPython(userID)
+    // const messages = await AppManager.createNewUserProcesses(userID)
 
-    // let message = await process.fetchOutput()
-    // process.enterCommand('1')
-    // message = await process.fetchOutput()
-    // process.enterCommand('F')
-    // message = await process.fetchOutput()
-    // process.enterCommand('q')
-    // message = await process.fetchOutput()
-    // process.enterCommand('2')
-    // message = await process.fetchOutput()
-    // process.enterCommand('A')
-    // message = await process.fetchOutput()
-    // process.enterCommand('Q')
-    // message = await process.fetchOutput()
-    // process.enterCommand('q')
-    // message = await process.fetchOutput()
+
+    // NOTE await app.fetchOutput in the beginning and after entering command
+    let message = await app.fetchOutput()
+    console.log(message)
+    // app.enterCommand('F')
+    // message = await app.fetchOutput()
+    // app.enterCommand('q')
+    // message = await app.fetchOutput()
+    // app.enterCommand('2')
+    // message = await app.fetchOutput()
+    // app.enterCommand('A')
+    // message = await app.fetchOutput()
+    // app.enterCommand('Q')
+    // message = await app.fetchOutput()
+    // app.enterCommand('q')
+    // message = await app.fetchOutput()
     // console.log(message)
+
+    AppManager.cleanUserApps(userID)
 })
