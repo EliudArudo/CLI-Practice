@@ -15,7 +15,7 @@ module.exports.buildCPP = function () {
 
         let cppBuildProcess = spawn("rm -rf bin && mkdir bin && make", {
             shell: true, // enables us to use &&
-            cwd: 'lib/c++'
+            cwd: 'src/lib/c++'
         });
 
         cppBuildProcess.stdout.on('data', function (data) {
@@ -57,7 +57,7 @@ module.exports.buildGo = function () {
 
         let goBuildProcess = spawn("rm -f go.mod && go mod init github.com/eliudarudo/go-cli-app && go build .", {
             shell: true, // enables us to use &&
-            cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+            cwd: 'src/lib/go/src/github.com/eliudarudo/go-cli-app'
         });
 
         goBuildProcess.stdout.on('data', function (data) {
