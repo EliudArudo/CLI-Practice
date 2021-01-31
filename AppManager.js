@@ -19,17 +19,18 @@ module.exports = class {
         app = this._spawnNewJava(userID)
         const java = await app.fetchOutput()
 
-        // app = this._spawnNewGo(userID)
-        // const go = await app.fetchOutput()
 
         app = this._spawnNewRust(userID)
         const rust = await app.fetchOutput()
 
-        // app = this._spawnNewCPP(userID)
-        // const cpp = await app.fetchOutput()
-
         app = this._spawnNewR(userID)
         const r = await app.fetchOutput()
+
+        // app = this._spawnNewGo(userID)
+        // const go = await app.fetchOutput()
+
+        // app = this._spawnNewCPP(userID)
+        // const cpp = await app.fetchOutput()
 
         return { python, nodejs, java, rust, r }
     }
