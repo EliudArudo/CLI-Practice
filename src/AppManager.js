@@ -58,14 +58,14 @@ module.exports = class {
 
     static _spawnNewPython(userID) {
         const python = spawn('python', ['main.py'], {
-            cwd: 'lib/python'
+            cwd: 'src/lib/python'
         })
         return this._pushAndReturnApp({ process: python, userID, name: 'python' })
     }
 
     static _spawnNewNodeJS(userID) {
         const nodejs = spawn('node', ['src/index.js'], {
-            cwd: 'lib/nodejs'
+            cwd: 'src/lib/nodejs'
         })
 
         return this._pushAndReturnApp({ process: nodejs, userID, name: 'nodejs' })
@@ -73,35 +73,35 @@ module.exports = class {
 
     static _spawnNewJava(userID) {
         const java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
-            cwd: 'lib/java'
+            cwd: 'src/lib/java'
         })
         return this._pushAndReturnApp({ process: java, userID, name: 'java' })
     }
 
     static _spawnNewGo(userID) {
         const go = spawn("./go-cli-app", [], {
-            cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
+            cwd: 'src/lib/go/src/github.com/eliudarudo/go-cli-app'
         })
         return this._pushAndReturnApp({ process: go, userID, name: 'go' })
     }
 
     static _spawnNewRust(userID) {
         const rust = spawn('cargo', ['run'], {
-            cwd: 'lib/rust'
+            cwd: 'src/lib/rust'
         })
         return this._pushAndReturnApp({ process: rust, userID, name: 'rust' })
     }
 
     static _spawnNewCPP(userID) {
         const cpp = spawn("./main", ["testing"], {
-            cwd: 'lib/c++/bin'
+            cwd: 'src/lib/c++/bin'
         })
         return this._pushAndReturnApp({ process: cpp, userID, name: 'cpp' })
     }
 
     static _spawnNewR(userID) {
         const r = spawn("R", ["--vanilla"], {
-            cwd: "lib/r/src"
+            cwd: "src/lib/r/src"
         })
         return this._pushAndReturnApp({ process: r, userID, name: 'r' })
     }
