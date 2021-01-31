@@ -20,7 +20,6 @@ module.exports = class {
         app = this._spawnNewJava(userID)
         const java = await app.fetchOutput()
 
-
         app = this._spawnNewRust(userID)
         const rust = await app.fetchOutput()
 
