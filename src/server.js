@@ -1,31 +1,23 @@
+const http = require('http')
 const express = require('express')
+const socketIO = require('socket.io')
+
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+const { testSingleAppInit } = require('./tests')
 
 const app = express()
-const port = process.env.PORT || 3000
+const server = http.createServer(app)
 
+const IO = socketIO(server)
+IO.origins(["*:*", "http://localhost:8080"])
 
-const AppManager = require('./AppManager')
+const PORT = process.env.PORT || 3000
 
-
-/* Dev environment on Windows */
-
-// let python = spawn('python', ['main.py'], {
-//     cwd: 'lib/python'
-// });
-
-/* 
-  Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
-  Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
-  Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
-  Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
-
-  Fastest way to fetch object from an array
-  https://stackoverflow.com/questions/10557486/in-an-array-of-objects-fastest-way-to-find-the-index-of-an-object-whose-attribu
-*/
-
-/*
-   Test using 'localhost:3000/<input>, e.g 1/2/3/a/b'
-*/
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(cors())
 
 
 app.get('/send/:val', (req, res) => {
@@ -36,31 +28,10 @@ app.get('/send/:val', (req, res) => {
 })
 
 
-// 
-app.listen(port, async () => {
-  console.log(`Express listening on port: ${port}`)
 
-  const userID = 'elly'
-  const messages = await AppManager.createNewUserProcesses(userID)
-  // console.log(messages.cpp)
-  const app = AppManager.fetchUserProcess(userID, 'python')
 
-  // NOTE await app.fetchOutput in the beginning and after entering command
-  let message = await app.fetchOutput()
-  console.log(message)
-  // app.enterCommand('F')
-  // message = await app.fetchOutput()
-  // app.enterCommand('q')
-  // message = await app.fetchOutput()
-  // app.enterCommand('2')
-  // message = await app.fetchOutput()
-  // app.enterCommand('A')
-  // message = await app.fetchOutput()
-  // app.enterCommand('Q')
-  // message = await app.fetchOutput()
-  // app.enterCommand('q')
-  // message = await app.fetchOutput()
-  // console.log(message)
 
-  // AppManager.cleanUserApps(userID)
+server.listen(PORT, async () => {
+  console.log(`Express listening on port: ${PORT}`)
+  testSingleAppInit()
 })

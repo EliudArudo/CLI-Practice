@@ -3,6 +3,17 @@ const { spawn } = require('child_process')
 const App = require('./App')
 const { buildCPP, buildGo } = require('./buildExecutables')
 
+
+/*
+  Docker - https://pythonspeed.com/articles/base-image-python-docker-images/
+  Docker - https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
+  Docker - https://hub.docker.com/r/frolvlad/alpine-gxx/tags?page=1&ordering=last_updated
+  Docker - https://github.com/r-hub/r-minimal/blob/master/Dockerfile
+
+  Fastest way to fetch object from an array
+  https://stackoverflow.com/questions/10557486/in-an-array-of-objects-fastest-way-to-find-the-index-of-an-object-whose-attribu
+*/
+
 // Static property
 let _processes = []
 module.exports = class {
