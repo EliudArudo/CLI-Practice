@@ -1,7 +1,18 @@
+const fs = require("fs")
 const { spawn } = require('child_process')
 
 module.exports.buildCPP = function () {
     return new Promise(resolve => {
+
+        const WINDOWS_FILE = fs.existsSync('lib/c++/bin/main.exe')
+        const ALPINE_LINUX_FILE = fs.existsSync('lib/c++/bin/main')
+
+        if (WINDOWS_FILE || ALPINE_LINUX_FILE) {
+            resolve(true)
+            return
+        }
+
+
         let cppBuildProcess = spawn("rm -rf bin && mkdir bin && make", {
             shell: true, // enables us to use &&
             cwd: 'lib/c++'
@@ -36,6 +47,14 @@ module.exports.buildCPP = function () {
 
 module.exports.buildGo = function () {
     return new Promise(function (resolve) {
+        const WINDOWS_FILE = fs.existsSync('lib/go/src/github.com/eliudarudo/go-cli-app/go-cli-app.exe')
+        const ALPINE_LINUX_FILE = fs.existsSync('lib/go/src/github.com/eliudarudo/go-cli-app/go-cli-app')
+
+        if (WINDOWS_FILE || ALPINE_LINUX_FILE) {
+            resolve(true)
+            return
+        }
+
         let goBuildProcess = spawn("rm -f go.mod && go mod init github.com/eliudarudo/go-cli-app && go build .", {
             shell: true, // enables us to use &&
             cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'

@@ -1,6 +1,7 @@
 const { spawn } = require('child_process')
 
 const App = require('./App')
+const { buildCPP, buildGo } = require('./buildExecutables')
 
 // Static property
 let _processes = []
@@ -26,13 +27,15 @@ module.exports = class {
         app = this._spawnNewR(userID)
         const r = await app.fetchOutput()
 
-        // app = this._spawnNewGo(userID)
-        // const go = await app.fetchOutput()
+        await buildGo()
+        app = this._spawnNewGo(userID)
+        const go = await app.fetchOutput()
 
-        // app = this._spawnNewCPP(userID)
-        // const cpp = await app.fetchOutput()
+        await buildCPP()
+        app = this._spawnNewCPP(userID)
+        const cpp = await app.fetchOutput()
 
-        return { python, nodejs, java, rust, r }
+        return { python, nodejs, java, go, rust, cpp, r }
     }
 
     static userProcessExists(userID) {

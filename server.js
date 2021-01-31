@@ -4,12 +4,8 @@ const app = express()
 const port = process.env.PORT || 3000
 
 
-const { buildCPP, buildGo } = require('./buildExecutables')
 const AppManager = require('./AppManager')
 
-
-let CPP_BUILD = false
-let GO_BUILD = false
 
 /* Dev environment on Windows */
 
@@ -27,50 +23,9 @@ let GO_BUILD = false
   https://stackoverflow.com/questions/10557486/in-an-array-of-objects-fastest-way-to-find-the-index-of-an-object-whose-attribu
 */
 
-/* FOR DOCKER ALPINE */
-// let python = spawn('python3', ['main.py'], {
-//     cwd: 'lib/python'
-// })
-
-// let nodejs = spawn('node', ['src/index.js'], {
-//     cwd: 'lib/nodejs'
-// })
-
-// let rust = spawn('cargo', ['run'], {
-//     cwd: 'lib/rust'
-// })
-
-// let java = spawn("java", ["-Dfile.encoding=UTF-8", "-classpath", "./out/production/java", "com.eliudarudo.cliapp.Main"], {
-//     cwd: 'lib/java'
-// })
-
-// let r = spawn("R", ["--vanilla"], {
-//     cwd: "lib/r/src"
-// })
-
-// let go = spawn("./go-cli-app", [], {
-//     cwd: 'lib/go/src/github.com/eliudarudo/go-cli-app'
-// })
-
-// let cpp = spawn("./main", ["testing"], {
-//     cwd: 'lib/c++/bin'
-// })
-
-
-/* NOT YET SUPPORTED ON ALPINE LINUX */
-
-// let dart = spawn('dart', ['lib/main.dart'], {
-//     cwd: 'lib/dart'
-// });
-
 /*
    Test using 'localhost:3000/<input>, e.g 1/2/3/a/b'
 */
-
-async function buildExecutables() {
-    CPP_BUILD = await buildCPP()
-    GO_BUILD = await buildGo()
-}
 
 
 app.get('/send/:val', (req, res) => {
@@ -81,19 +36,20 @@ app.get('/send/:val', (req, res) => {
 })
 
 
-
+// 
 app.listen(port, async () => {
     console.log(`Express listening on port: ${port}`)
-    // buildExecutables()
 
-    const userID = 'elly'
-    const app = AppManager._spawnNewPython(userID)
+    // const userID = 'elly'
+    // const app = AppManager._spawnNewPython(userID)
     // const messages = await AppManager.createNewUserProcesses(userID)
+
+    // console.log(messages.cpp)
 
 
     // NOTE await app.fetchOutput in the beginning and after entering command
-    let message = await app.fetchOutput()
-    console.log(message)
+    // let message = await app.fetchOutput()
+    // console.log(message)
     // app.enterCommand('F')
     // message = await app.fetchOutput()
     // app.enterCommand('q')
@@ -108,5 +64,5 @@ app.listen(port, async () => {
     // message = await app.fetchOutput()
     // console.log(message)
 
-    AppManager.cleanUserApps(userID)
+    // AppManager.cleanUserApps(userID)
 })
