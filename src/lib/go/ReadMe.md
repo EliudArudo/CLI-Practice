@@ -1,6 +1,8 @@
 <div style="height: 20px;width: 360px; display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px; padding-left: 10px">
 
-<img style="height: 100%; width: auto;" src="readme-images/home.png"/>
+<a href="https://github.com/EliudArudo/CLI-Practice/tree/master/" style="outline: none;" rel="some text">
+    <img style="height: 100%; width: auto; margin-left: 5px;" src="readme-images/home.png"/>
+  </a>
 
 <div style="height: 20px; display: flex; flex-direction: row; margin-bottom: 10px; padding-left: 10px">
   <a style="margin-right: 20px" href="https://github.com/EliudArudo/CLI-Practice/tree/master/src/lib/go" style="outline: none;" rel="some text">
