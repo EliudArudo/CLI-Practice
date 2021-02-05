@@ -36,7 +36,7 @@
 
 <div style="height: 100px;width: 360px; display: flex; flex-direction: row; justify-content: center; align-items: flex-end;">
 
-<img style="height: 100%; width: auto;" src="readme-images/nodeJS.png"/>
+<img style="height: 100%; width: auto;" src="readme-images/nodejs.png"/>
 </div>
 
 ### Instructions
