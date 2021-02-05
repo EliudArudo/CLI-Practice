@@ -21,8 +21,11 @@ Please make sure you have the following installed:
 - R
 
 **Tests**
-
-Run
+1. Install dependencies
+```
+> npm install
+```
+2. Run
 ```
 > npm run test
 ```

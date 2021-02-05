@@ -43,7 +43,11 @@
 ### Instructions
 1. Install the latest version of NodeJS(LTS)
 2. Clone this repository
-3. Run
+3. Install dependencies
+```
+> npm install
+```
+4. Run
 ```
 > npm run start
 ```
