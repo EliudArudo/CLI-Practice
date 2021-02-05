@@ -29,7 +29,7 @@ Run
 
 **Languages**
 
-<div style="height: 40px;width: 360px; display: flex; flex-direction: row; margin-bottom: 10px; padding-left: 10px">
+<div style="height: 20px;width: 360px; display: flex; flex-direction: row; margin-bottom: 10px; padding-left: 10px">
   <a href="https://github.com/EliudArudo/CLI-Practice/tree/master/src/lib/python" style="outline: none;" rel="some text">
     <img style="height: 100%; width: auto; margin-left: 5px;" src="src/lib/python/readme-images/python.png"/>
   </a>
