@@ -24,3 +24,45 @@ jobs:
             - name: Run container and test
               run: |
                 docker run --env JWT_SECRET=${{ secrets.JWT_SECRET }} --env JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} server/image:${{ github.sha }}
+
+    deploy:
+        name: CD
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the repository
+              uses: actions/checkout@v1
+
+            - name: Build Docker image  
+              working-directory: server
+              run: |
+                docker build . --tag gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVER_IMAGE }}:${{ github.sha }}
+            
+            - name: Authenticate into Google Cloud Platform
+              uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+              with:
+                service_account_email: ${{ secrets.EXPRESS_SERVICE_ACCOUNT_EMAIL }}    
+                service_account_key: ${{ secrets.EXPRESS_SERVICE_ACCOUNT_KEY }}    
+
+            - name: Install Google cloud beta tools  
+              run: "gcloud components install beta --quiet"  
+              
+            - name: Set Google Cloud run instance region  
+              run: "gcloud config set run/region  ${{ secrets.REGION_ID }} --quiet"  
+
+            - name: Configure Docker to use Google Cloud Platform  
+              run: "gcloud auth configure-docker --quiet"  
+
+            - name: Install Docker-GCR credentials  
+              run: "gcloud components install docker-credential-gcr --quiet"
+
+            - name: Push image to Google Cloud Container Registry  
+              run: docker push gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVER_IMAGE }}:${{ github.sha }}
+
+            - name: Deploy on cloud run  
+              run: |
+                gcloud beta run deploy ${{ secrets.SERVER_CLOUD_RUN_SVC }} \
+                --project ${{ secrets.PROJECT_ID }} \
+                --image gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVER_IMAGE }}:${{ github.sha }} \
+                --platform=managed \
+                --allow-unauthenticated \
+                --update-env-vars JWT_SECRET=${{ secrets.JWT_SECRET }},JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }}

@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-ts-vuetify-template",
+  "version": "1.0.0",
+  "description": "Nuxt Template with Vuetify@1.5 and Typescript Support",
+  "author": "EliudArudo",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@types/socket.io-client": "^1.4.35",
+    "axios": "^0.21.1",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.0.0",
+    "nuxt-property-decorator": "^2.4.0",
+    "socket.io-client": "^2.4.0",
+    "vuetify": "^1.2.4"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^0.3.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "nodemon": "^1.11.0",
+    "prettier": "1.14.3",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}
