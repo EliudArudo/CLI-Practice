@@ -3,16 +3,14 @@ import * as io from 'socket.io-client'
 export class WebsocketsProvider {
     private static $vue: any | null = null
 
-    private static socketURL: string = "http://localhost:4000/"
-    // private socketURL: string = "https://mynnect-server.herokuapp.com"
+    // private static socketURL: string = "http://localhost:4000/"
+    private static socketURL: string = "https://server-yydmvovnoa-uc.a.run.app"
 
     private static idEvent: string = "id"
     private static consoleMessagesEvent: string = "console-messages"
 
 
-    constructor() {
-
-    }
+    constructor() { }
 
     static async setupListener(rootInstance: any): Promise<void> {
         try {

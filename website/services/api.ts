@@ -3,8 +3,8 @@ import * as axiosData from 'axios'
 const axios = axiosData.default
 
 export class ApiProvider {
-    private baseRoute: string = "http://localhost:4000"
-    // private baseRoute: string = "https://mynnect-server.herokuapp.com"
+    // private baseRoute: string = "http://localhost:4000"
+    private baseRoute: string = "https://server-yydmvovnoa-uc.a.run.app"
 
     constructor() { }
 
