@@ -4,7 +4,7 @@ const AppManager = require('../util/AppManager')
 const { getToken } = require('../util')
 
 module.exports = function (io) {
-    io.origins(["*:*", "http://localhost:3000"])
+    io.origins(["*:*", "http://localhost:3000", "https://language-practice.netlify.app"])
     /* 
        Make sure client socket.io-client library is 2.4.0
 

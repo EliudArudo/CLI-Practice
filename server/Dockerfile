@@ -57,10 +57,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-
 EXPOSE 4000
 
-CMD npm start
+RUN npm run install
 
-# Push v3
+CMD npm run start
