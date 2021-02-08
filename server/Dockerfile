@@ -59,6 +59,6 @@ COPY . .
 
 EXPOSE 4000
 
-RUN npm run install
+RUN npm install
 
 CMD npm run start
