@@ -1,28 +1,16 @@
-const isDevelopment = !process.env.NODE_ENV
+let JWT_SECRET, JWT_EXPIRATION
 
-const MONGO_URI = isDevelopment ?
-    require("./secrets").MONGO_URI :
-    process.env.MONGO_URI
+if (!process.env.NODE_ENV) {
+    const secrets = require('./secrets')
 
-const JWT_SECRET = isDevelopment ?
-    require("./secrets").JWT_SECRET :
-    process.env.JWT_SECRET
-
-const JWT_EXPIRATION = isDevelopment ?
-    require("./secrets").JWT_EXPIRATION :
-    process.env.JWT_EXPIRATION
-
-const PRS_HANDSHAKE = isDevelopment ?
-    require("./secrets").PRS_HANDSHAKE :
-    process.env.PRS_HANDSHAKE
-
-
+    JWT_SECRET = secrets.JWT_SECRET
+    JWT_EXPIRATION = secrets.JWT_EXPIRATION
+} else {
+    JWT_SECRET = process.env.JWT_SECRET
+    JWT_EXPIRATION = process.env.JWT_EXPIRATION
+}
 
 module.exports = {
-    MONGO_URI,
-
     JWT_SECRET,
-    JWT_EXPIRATION,
-
-    PRS_HANDSHAKE
+    JWT_EXPIRATION
 }
