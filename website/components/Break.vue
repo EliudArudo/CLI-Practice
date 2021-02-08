@@ -19,10 +19,14 @@ import { Component, Vue } from 'nuxt-property-decorator'
 @Component({})
 export default class Break extends Vue {
   backupQuotes: Array<string> = [
-    '1 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
-    '2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
-    '3 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
-    '4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
+    'The first hard drive could only hold 5MB of data.',
+    'The new Texas Instrument calculators have ABC keyboards as the standardised tool for tests.',
+    'A 15-year-old once hacked NASA.',
+    'HP, Apple, and Microsoft all began developing their computers in a garage.',
+    'The woman who rented out her garage to Larry Page and Sergey Brin in 1998 later became the CEO of YouTube.',
+    'The average computer blinks 7 times a minute.',
+    'In 1956, 5 megabytes (5MB) of data weighed a ton.',
+    'The first digital computer was Colossus and it was built between 1934 and 1945 by British codebreakers.',
   ]
 
   quotes: Array<string> = []
