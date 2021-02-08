@@ -6,13 +6,13 @@
           v-for="(item, index) in apps"
           :key="`tile-${item.id}`"
           :class="{ 'tile-border': index < apps.length - 1 }"
+          @click="goToElement(item.id)"
         >
           <v-list-tile-action>
             <img
               :class="{ 'selected-nav-link': selectedSection === item.id }"
               :src="item.src"
               :alt="item.id"
-              @click="goToElement(item.id)"
             />
           </v-list-tile-action>
           <v-list-tile-content>
@@ -409,6 +409,12 @@ export default class DefaultLayout extends Vue {
   }
   50% {
     border-color: orange;
+  }
+}
+
+@media (max-width: 959px) {
+  .toolbar-container {
+    padding: 0;
   }
 }
 </style>
