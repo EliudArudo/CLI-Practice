@@ -53,6 +53,8 @@ RUN rustc --version
 RUN R --version
 
 #Initializing the server
+ENV NODE_ENV='PRODUCTION' 
+
 WORKDIR /app
 
 COPY . .
