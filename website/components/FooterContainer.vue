@@ -4,12 +4,12 @@
       <div class="full-size flex-center flex-row flex-wrap footer-body">
         <div class="flex-center flex-column section first">
           <div class="typable-row-1">
-            <span id="footer-statement">Putting knowledge</span>
+            <span id="footer-statement">Learning,</span>
             &nbsp;
           </div>
 
           <div class="typable-row-2">
-            <span id="footer-statement">to use...</span>
+            <span id="footer-statement">by practice</span>
             &nbsp;
           </div>
         </div>
@@ -155,7 +155,6 @@ export default class FooterContainer extends Vue {
 }
 
 .section {
-  max-width: 210px;
   align-items: flex-start;
 }
 
@@ -166,11 +165,11 @@ export default class FooterContainer extends Vue {
 }
 
 .second {
-  max-width: 100px;
+  width: 75px;
 }
 
 .third {
-  max-width: 70px;
+  width: 70px;
 }
 
 .third-container {

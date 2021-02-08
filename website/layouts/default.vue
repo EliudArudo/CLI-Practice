@@ -135,7 +135,7 @@ export default class DefaultLayout extends Vue {
   }
 
   setupWSListeners(): void {
-    WebsocketsProvider.setupListener(this)
+    // WebsocketsProvider.setupListener(this)
 
     this.$root.$on('WEBSOCKETS:ID', (id: any) => {
       this.$dataProvider.updateUserID(id)

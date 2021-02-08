@@ -228,7 +228,9 @@ export default class LanguageComponent extends Vue {
 
   position: absolute;
   top: -25px;
-  right: -20px;
+  right: -10px;
+
+  overflow: hidden;
 }
 
 .output-result {
@@ -347,6 +349,27 @@ input {
   }
   100% {
     background: white;
+  }
+}
+
+@media (max-width: 739px) {
+  .component-container {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+  }
+
+  .component-description {
+    margin-bottom: 60px;
+
+    align-items: center !important;
+  }
+
+  .component-content {
+    text-align: center;
+  }
+
+  .console-app {
+    margin-bottom: 20px;
   }
 }
 </style>
