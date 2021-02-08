@@ -65,6 +65,7 @@ jobs:
                 gcloud beta run deploy ${{ secrets.SERVER_CLOUD_RUN_SVC }} \
                 --project ${{ secrets.PROJECT_ID }} \
                 --image gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVER_IMAGE }}:${{ github.sha }} \
+                --memory=2G \
                 --platform=managed \
                 --allow-unauthenticated \
                 --update-env-vars JWT_SECRET=${{ secrets.JWT_SECRET }},JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }}
