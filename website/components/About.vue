@@ -10,7 +10,7 @@
         </v-avatar>
 
         <span class="paragraph-margin-bottom"
-          >A self taught developer with passion for creating efficient and
+          >A software engineer by heart with passion for creating efficient and
           scalable sytems and applications.</span
         >
         <span class="paragraph-margin-bottom"
